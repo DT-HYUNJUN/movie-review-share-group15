@@ -49,21 +49,28 @@
 
 ### 8-2 프로필 페이지 수정
 
-## 내일
+## 내일 작업
 
 - 필수
-0. 프로필 페이지에 리뷰 글 목록 조회
-1. pip install imagekit
-2. metacritic 템플릿
-  - navbar
-3. card-grid 반응형 형식
+
+  1. 프로필 페이지에 리뷰 글 목록 조회
+
+  2. pip install imagekit
+
+  3. metacritic 템플릿 - navbar
+
+  4. card-grid 반응형 형식
 
 - 추가
-4. 영화 평점
-  - review 모델에 rating(min ~ max) 필드 생성
-  - rating 점수 (absolute)
-5. 댓글 수 (filter, script)
-6. 영화 장르
-  - review 모델에 category 필드
+
+  5. 영화 평점
+
+  6. review 모델에 rating(min ~ max) 필드 생성
+
+  7. rating 점수 (absolute)
+
+  8. 댓글 수 (filter, script)
+
+  9. 영화 장르 - review 모델에 category 필드
 
 ## 후기

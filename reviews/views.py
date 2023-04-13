@@ -16,10 +16,19 @@ def create(request):
             review = form.save(commit=False)
             review.user = request.user
             review.save()
-            return redirect('reviews:index') # 수정 필요
+            return redirect('reviews:detail', review.pk) 
     else:
         form = ReviewForm()
     context = {
         'form': form,
     }
     return render(request, 'reviews/create.html', context)
+
+
+def detail(request, review_pk):
+    review = Review.objects.get(pk=review_pk)
+    # 댓글기능 구현
+    context = {
+        'review': review,
+    }
+    return render(request, 'reviews/detail.html', context)

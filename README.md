@@ -40,3 +40,7 @@
 3. 댓글 삭제
  
 ### 8. 프로필 페이지 생성
+1. 명칭: profile
+2. 'username', 'email', 'first_name', 'last_name'
+
+### 8-2 프로필 페이지 수정

@@ -46,3 +46,8 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return redirect('reviews:index')
+
+
+@login_required
+def profile(request):
+    return render(request, 'accounts/profile.html')

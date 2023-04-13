@@ -25,6 +25,7 @@ def create(request):
     return render(request, 'reviews/create.html', context)
 
 
+@login_required
 def detail(request, review_pk):
     review = Review.objects.get(pk=review_pk)
     # 댓글기능 구현
@@ -32,3 +33,23 @@ def detail(request, review_pk):
         'review': review,
     }
     return render(request, 'reviews/detail.html', context)
+
+
+@login_required
+def update(request, review_pk):
+    review = Review.objects.get(pk=review_pk)
+    if review.user == request.user:
+        if request.method == 'POST':
+            form = ReviewForm(request.POST, request.FILES, instance=review)
+            if form.is_valid():
+                form.save()
+                return redirect('reviews:detail', review_pk)
+        else:
+            form = ReviewForm(instance=review)
+    else:
+        return redirect('reviews:index')
+    context = {
+        'review': review,
+        'form': form,
+    }
+    return render(request, 'reviews/update.html', context)

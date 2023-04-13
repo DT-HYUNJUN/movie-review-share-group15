@@ -32,9 +32,12 @@ def create(request):
 @login_required
 def detail(request, review_pk):
     review = Review.objects.get(pk=review_pk)
-    # 댓글기능 구현
+    comments = review.comment_set.all()
+    comment_form = CommentForm()
     context = {
+        'comment_form': comment_form,
         'review': review,
+        'comments': comments,
     }
     return render(request, 'reviews/detail.html', context)
 
@@ -64,3 +67,19 @@ def delete(request, review_pk):
     if request.user == review.user:
         review.delete()
     return redirect('reviews:index')
+
+@login_required
+def comment_create(request, review_pk):
+    review = Review.objects.get(pk=review_pk)
+    comment_form = CommentForm(request.POST)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.review = review
+        comment.user = request.user
+        comment.save()
+        return redirect('reviews:detail', review_pk)
+    context = {
+        'comment_form': comment_form,
+        'review': review,
+    }
+    return render(request, 'reviews/detail.html', context)

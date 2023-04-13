@@ -32,11 +32,25 @@
   <p>사진 없음</p>
 {% endif %}
 
-
-  
-
-
 <a href="{% url 'reviews:index' %}">[back]</a>
+
+<form action=" {% url 'reviews:comment_create' review.pk %} " method="POST">
+  {% csrf_token %}
+  {{ comment_form.as_p }}
+  <input type="submit" value="댓글 작성">
+</form>
+
+<h3>
+  댓글 목록
+</h3>
+{% for comment in  comments%}
+  <div>
+    <p>작성자 - {{ comment.user }}</p>
+    <p>댓글 내용 - {{ comment.content }}</p>
+  </div>
+
+{% endfor %}
+
 
 
 {% endblock content %}

@@ -2,6 +2,8 @@
 {% block content %}
 <h1>DETAIL</h1>
 
+<a class="btn btn-secondary" href="{% url 'reviews:update' review.pk %}">수정</a>
+
 <p>
   후기 번호 - {{review.pk}}
 </p>

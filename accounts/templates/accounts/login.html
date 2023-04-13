@@ -3,7 +3,11 @@
 <h1>로그인</h1>
 <form action="{% url 'accounts:login' %}" method='POST'>
   {% csrf_token %}
-  {{ form.as_p }}
+  {% for field in form %}
+    <div class="input-group">
+      {{ field }}
+    </div>
+  {% endfor %}
   <input type="submit" value="로그인">
 </form>
 {% endblock content %}

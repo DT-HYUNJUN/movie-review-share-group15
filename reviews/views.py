@@ -5,7 +5,11 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
-    return render(request, 'reviews/index.html')
+    reviews = Review.objects.all()
+    context = {
+        'reviews': reviews
+    }
+    return render(request, 'reviews/index.html', context)
 
 
 @login_required
@@ -53,3 +57,10 @@ def update(request, review_pk):
         'form': form,
     }
     return render(request, 'reviews/update.html', context)
+
+@login_required
+def delete(request, review_pk):
+    review = Review.objects.get(pk=review_pk)
+    if request.user == review.user:
+        review.delete()
+    return redirect('reviews:index')

@@ -9,4 +9,12 @@
   <input class="btn btn-danger" type="submit" value="로그아웃">
 </form>
 <a class="btn btn-outline-primary" href="{% url 'reviews:create' %}">리뷰작성</a>
+{% for review in reviews %}
+  <ul>
+    <li>
+      <a href="{% url 'reviews:detail' review.pk %}">{{ review.title }}</a>(작성자: {{ review.user }})
+    </li>
+    <hr>
+  </ul>
+{% endfor %}
 {% endblock content %}

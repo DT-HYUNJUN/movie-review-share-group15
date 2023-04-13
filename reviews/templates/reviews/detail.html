@@ -3,6 +3,10 @@
 <h1>DETAIL</h1>
 
 <a class="btn btn-secondary" href="{% url 'reviews:update' review.pk %}">수정</a>
+<form action="{% url 'reviews:delete' review.pk %}" method="POST">
+  {% csrf_token %}
+  <input class="btn btn-danger" type="submit" value="삭제">
+</form>
 
 <p>
   후기 번호 - {{review.pk}}

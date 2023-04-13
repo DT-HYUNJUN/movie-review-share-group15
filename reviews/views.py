@@ -83,3 +83,11 @@ def comment_create(request, review_pk):
         'review': review,
     }
     return render(request, 'reviews/detail.html', context)
+
+
+@login_required
+def comment_delete(request, review_pk, comment_pk):
+    comment = Comment.objects.get(pk=comment_pk)
+    if comment.user == request.user:
+        comment.delete()
+    return redirect('reviews:detail', review_pk)

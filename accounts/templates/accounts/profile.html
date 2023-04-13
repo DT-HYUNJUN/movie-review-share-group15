@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>마이 페이지</h1>
+<hr>
+<ul>
+  <li>ID: {{ user.username }}</li>
+  <li>E-mail: {{ user.email }}</li>
+  <li>성: {{ user.last_name }}</li>
+  <li>이름: {{ user.first_name }}</li>
+</ul>
+{% endblock content %}

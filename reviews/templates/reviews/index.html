@@ -8,4 +8,5 @@
   {% csrf_token %}
   <input class="btn btn-danger" type="submit" value="로그아웃">
 </form>
+<a class="btn btn-outline-primary" href="{% url 'reviews:create' %}">리뷰작성</a>
 {% endblock content %}

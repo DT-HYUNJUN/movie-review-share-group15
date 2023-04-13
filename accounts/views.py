@@ -22,3 +22,20 @@ def signup(request):
         'form': form,
     }
     return render(request, 'accounts/signup.html', context)
+
+def login(request):
+    if request.user.is_authenticated:
+        return redirect('reviews:index')
+    
+    if request.method == 'POST':
+        form = AuthenticationForm(request, request.POST)
+        if form.is_valid():
+            auth_login(request, form.get_user())
+            return redirect('reviews:index')
+    else:
+        form = AuthenticationForm()
+
+    context = {
+        'form' : form,
+    }
+    return render(request, 'accounts/login.html', context)

@@ -25,10 +25,12 @@
   <hr>
   <div class="card mb-3 border-0">
     <div class="row g-0">
-      <div class="col-md-2">
+      <div class="col-md-2 position-relative">
         {% if review.image %}
+          <div class="rating position-absolute top-0 end-0 bg-warning fs-3 p-2 rounded-2 text-white fw-boldtext-center" style="width: 30%;">{{ review.rating }}</div>
           <img src="{{ review.image_thumbnail.url }}" class="img-fluid rounded-start" alt="...">
         {% else %}
+          <div class="rating position-absolute top-0 end-0 bg-warning fs-3 p-2 rounded-2 text-white fw-bold text-center" style="width: 30%;">{{ review.rating }}</div>
           <img src="{% static 'img/film.png' %}" class="img-fluid rounded-start" alt="">
         {% endif %}
       </div>
@@ -36,6 +38,8 @@
         <div class="card-body">
           <h5 class="card-title fw-bold">{{ review.movie }}</h5>
           <p class="card-text">{{ review.content }}</p>
+          <p class="card-text"><small class="text-body-secondary">#{{ review.genre }}</small></p>
+      </div>
         </div>
       </div>
     </div>

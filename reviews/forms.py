@@ -34,9 +34,32 @@ class ReviewForm(forms.ModelForm):
             }
         ),
     )
+
+    rating = forms.IntegerField(
+        widget=forms.NumberInput(
+            attrs={
+                'min': 1,
+                'max': 100,
+                'value': 100,
+                'class': 'form-control',
+                'placeholder': '점수를 입력해주세요.',
+            },
+        ),
+    )   
+
+    CHOICES = (('액션' , '액션'), ('SF', 'SF'), ('로맨스', '로맨스'), ('드라마', '드라마'), ('스릴러', '스릴러'))
+    genre = forms.ChoiceField(
+        choices=CHOICES,
+        widget=forms.Select(
+            attrs={
+                'class': 'form-control',
+            }
+        )
+    )
+
     class Meta:
         model = Review
-        fields = ('title', 'content', 'movie', 'image',)
+        fields = ('title', 'content', 'movie', 'image', 'rating', 'genre',)
 
 
 class CommentForm(forms.ModelForm):

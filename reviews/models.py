@@ -10,6 +10,8 @@ class Review(models.Model):
     title = models.CharField(max_length=30)
     content = models.TextField(null=True)
     movie = models.CharField(max_length=30)
+    rating = models.IntegerField(default=100)
+    genre = models.CharField(max_length=50, default='')
     image = models.ImageField(blank=True, upload_to='%Y/%m/%d/')
     image_thumbnail = ImageSpecField(source='image',
         processors=[ResizeToFill(200, 200)],

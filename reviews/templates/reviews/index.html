@@ -2,19 +2,7 @@
 {% block content %}
 <h1>Index</h1>
 {{ user }}
-{% if user.is_authenticated %}
-<a class="btn" href="{% url 'accounts:profile' %}">마이페이지</a>
-<form action="{% url 'accounts:logout' %}" method="POST">
-  {% csrf_token %}
-  <input class="btn btn-danger" type="submit" value="로그아웃">
-</form>
-<a class="btn btn-outline-primary" href="{% url 'reviews:create' %}">리뷰작성</a>
-{% else %}
-  <a class="btn" href="{% url 'accounts:signup' %}">회원가입</a>
-  <a class="btn btn-primary" href="{% url 'accounts:login' %}">로그인</a>
-{% endif %}
-<br>
-<hr>
+
 <br>
 {% for review in reviews %}
   <ul>
@@ -24,4 +12,5 @@
     <hr>
   </ul>
 {% endfor %}
+<a class="btn btn-outline-primary" href="{% url 'reviews:create' %}">리뷰작성</a>
 {% endblock content %}

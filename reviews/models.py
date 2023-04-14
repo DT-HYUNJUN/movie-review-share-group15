@@ -1,5 +1,7 @@
 from django.db import models
 from django.conf import settings
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 
 # Create your models here.
 
@@ -9,6 +11,11 @@ class Review(models.Model):
     content = models.TextField(null=True)
     movie = models.CharField(max_length=30)
     image = models.ImageField(blank=True, upload_to='%Y/%m/%d/')
+    image_thumbnail = ImageSpecField(source='image',
+        processors=[ResizeToFill(300, 300)],
+        format='JPEG',
+        options={'quality': 100}
+    )
 
 
 class Comment(models.Model):

@@ -5,6 +5,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, CustomUserChangeForm
+from reviews.models import Review
 # Create your views here.
 
 
@@ -50,4 +51,9 @@ def logout(request):
 
 @login_required
 def profile(request):
-    return render(request, 'accounts/profile.html')
+    user = request.user
+    reviews = user.review_set.all()
+    context = {
+        'reviews': reviews,
+    }
+    return render(request, 'accounts/profile.html', context)

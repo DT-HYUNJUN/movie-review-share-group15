@@ -8,4 +8,16 @@
   <li>성: {{ user.last_name }}</li>
   <li>이름: {{ user.first_name }}</li>
 </ul>
+<br>
+
+<div>
+  <h1>{{ request.user }}님이 작성한 리뷰 목록</h1>
+  {% for review in reviews %}
+    <a href="{% url 'reviews:detail' review.pk %}">
+      {{ review.title }}
+    </a>
+    <span> - {{ review.movie }}</span>
+  {% endfor %}
+</div>
+
 {% endblock content %}

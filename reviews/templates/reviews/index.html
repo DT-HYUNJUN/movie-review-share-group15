@@ -1,14 +1,23 @@
 {% extends 'base.html' %}
-{% block content %}
-<h1>Index</h1>
-{{ user }}
+{% load static %}
 
-<br>
+{% block content %}
+
+<div class="text-end">
+  <a href="{% url 'reviews:create' %}" style="color: blue;">
+    <i class="bi bi-file-earmark-plus fs-1"></i>
+  </a>
+</div>
+
 <div class="row row-cols-2 row-cols-md-6 g-4">
   {% for review in reviews %}
     <div class="col">
       <div class="card">
+        {% if review.image %}
         <img src="{{ review.image_thumbnail.url }}" class="card-img-top" alt="...">
+        {% else %}
+        <img src="{% static 'img/film.png' %}" alt="">
+        {% endif %}
         <div class="card-body">
           <h5 class="card-title fw-bold"><a href="{% url 'reviews:detail' review.pk %}">{{ review.title }}</a></h5>
           <p class="card-text"> {{ review.user }}</p>
@@ -17,7 +26,6 @@
     </div>
   {% endfor %}
 </div>
-<a class="btn btn-outline-primary" href="{% url 'reviews:create' %}">리뷰작성</a>
 {% endblock content %}
 
 

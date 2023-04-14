@@ -1,5 +1,6 @@
+
 #logo {
-  height: 4rem
+  height: 4rem;
 }
 
 #thumbnail {
@@ -10,3 +11,11 @@ a {
   text-decoration: none;
   color: black;
 }
+
+.create {
+  color: lightskyblue;
+}
+
+/* .font {
+  font-family: 'NeoDunggeunmoPro-Regular';
+} */

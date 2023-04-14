@@ -1,55 +1,68 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
-<h1>DETAIL</h1>
 
-<a class="btn btn-secondary" href="{% url 'reviews:update' review.pk %}">수정</a>
-<form action="{% url 'reviews:delete' review.pk %}" method="POST">
-  {% csrf_token %}
-  <input class="btn btn-danger" type="submit" value="삭제">
-</form>
+<div class="d-flex justify-content-between gap-2 mb-2">
+  <a class="btn btn-secondary" href="{% url 'reviews:index' %}">뒤로가기</a>
+  <div class="d-flex gap-2">
+    <a class="btn btn-secondary" href="{% url 'reviews:update' review.pk %}">수정</a>
+    <form action="{% url 'reviews:delete' review.pk %}" method="POST">
+      {% csrf_token %}
+      <input class="btn btn-danger" type="submit" value="삭제">
+    </form>
+  </div>
+</div>
 
-<p>
-  후기 번호 - {{review.pk}}
-</p>
-<p>
-  후기 작성자 - {{review.user}}
-</p>
-<p>
-  후기 제목 - {{review.title}}
-</p>
-<p>
-  후기 내용 - {{review.content}}
-</p>
-<p>
-  영화 이름 - {{review.movie}}
-</p>
+<div class="border rounded-3 p-3 mb-5">
+  <div>
+    <span class="fs-2">{{ review.pk }} - </span>
+    <span class="fs-2 fw-bold">{{ review.title }}</span>
+  </div>
+  <div>
+    <span class="text-secondary">{{ review.user }}</span>
+  </div>
+  <hr>
+  <div class="card mb-3 border-0">
+    <div class="row g-0">
+      <div class="col-md-2">
+        {% if review.image %}
+          <img src="{{ review.image_thumbnail.url }}" class="img-fluid rounded-start" alt="...">
+        {% else %}
+          <img src="{% static 'img/film.png' %}" class="img-fluid rounded-start" alt="">
+        {% endif %}
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title fw-bold">{{ review.movie }}</h5>
+          <p class="card-text">{{ review.content }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-{% if review.image %}
-  <p>영화 사진 - 
-    <img src="{{ review.image_thumbnail.url }}" alt="IMAGE">
-  </p>
-{% else %}
-  <p>사진 없음</p>
-{% endif %}
+<h3>댓글 목록</h3>
 
-<a href="{% url 'reviews:index' %}">[back]</a>
+{% for comment in  comments%}
+  <div class="d-flex align-items-center">
+    <div class="border-bottom py-2 w-100 d-flex align-items-center">
+      {{ comment.user }} - {{ comment.content }}
+      <form action="{% url 'reviews:comment_delete' review.pk comment.pk %}" method="POST">
+        {% csrf_token %}
+        <button class="border-0 bg-transparent text-danger" type="submit">X</button>
+      </form>
+    </div>
+  </div>
+{% endfor %}
 
 <form action=" {% url 'reviews:comment_create' review.pk %} " method="POST">
   {% csrf_token %}
-  {{ comment_form.as_p }}
-  <input type="submit" value="댓글 작성">
-</form>
-
-<h3>
-  댓글 목록
-</h3>
-{% for comment in  comments%}
-  <div class="d-flex align-items-center">
-    <span>{{ comment.user }} - {{ comment.content }}</span>
-    <form action="{% url 'reviews:comment_delete' review.pk comment.pk %}" method="POST">
-      {% csrf_token %}
-      <button class="border-0 bg-transparent text-danger" type="submit">X</button>
-    </form>
+  <div class="input-group my-3">
+    {% for field in comment_form %}
+    {{ field }}
+    {% endfor %}
+    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">댓글작성</button>
   </div>
-{% endfor %}
+</form>
 {% endblock content %}

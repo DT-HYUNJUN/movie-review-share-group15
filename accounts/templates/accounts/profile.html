@@ -1,23 +1,79 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>마이 페이지</h1>
-<hr>
-<ul>
-  <li>ID: {{ user.username }}</li>
-  <li>E-mail: {{ user.email }}</li>
-  <li>성: {{ user.last_name }}</li>
-  <li>이름: {{ user.first_name }}</li>
-</ul>
-<br>
+<div class="table-width">
+  <h1>마이 페이지</h1>
+  
+  <table class="table table-hover ">
+    <tbody>
+      <tr>
+        <th scope="row">아이디</th>
+        <td>{{ user.username }}</td>
+      </tr>
+      <tr>
+        <th scope="row">이메일</th>
+        <td>{{ user.email }}</td>
+      </tr>
+      <tr>
+        <th scope="row">성</th>
+        <td>{{ user.last_name }}</td>
+      </tr>
+      <tr>
+        <th scope="row">이름</th>
+        <td>{{ user.first_name }}</td>
+      </tr>
+    </tbody>
+  </table>
 
-<div>
-  <h1>{{ request.user }}님이 작성한 리뷰 목록</h1>
-  {% for review in reviews %}
-    <a href="{% url 'reviews:detail' review.pk %}">
-      {{ review.title }}
-    </a>
-    <span> - {{ review.movie }}</span>
-  {% endfor %}
+  <div>
+    <div class="border-3 border-dark border-bottom mb-3 pb-2">
+      <div class="row">
+        <div class="col-2 text-center">글 번호</div>
+        <div class="col-5 text-center">리뷰 제목</div>
+        <div class="col-5 text-center">영화</div>
+      </div>
+    </div>
+
+    {% for review in reviews %}
+    <div class="row">
+      <div class="col-2 text-center">{{ review.pk }}</div>
+      <div class="col-5 text-center">
+        <a href="{% url 'reviews:detail' review.pk %}">
+          {{ review.title }}
+        </a>
+      </div>
+      <div class="col-5 text-center">{{ review.movie }}</div>
+    </div>
+    <hr>
+    {% endfor %}
+  </div>
+
+
 </div>
+
+
+{% comment %} <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">글 번호</th>
+      <th scope="col">제목</th>
+      <th scope="col">영화</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+    {% for review in reviews %}
+    <tr>
+      <th scope="row">{{ review.pk }}</th>
+      <td colspan="2">
+        <a href="{% url 'reviews:detail' review.pk %}">
+        {{ review.title }}
+        </a>
+      </td>
+      <td>
+        {{ review.movie }}
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table> {% endcomment %}
 
 {% endblock content %}

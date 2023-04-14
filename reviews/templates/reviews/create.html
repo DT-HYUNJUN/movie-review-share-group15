@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Create</h1>
-<hr>
+
+<a class="btn btn-secondary mb-3" href="{% url 'reviews:index' %}">뒤로가기</a>
 <form action="{% url 'reviews:create' %}" method="POST" enctype="multipart/form-data">
   {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" value="작성">
+  {% for field in form %}
+  <div class="input-group mb-3">
+    {{ field }}
+  </div>
+  {% endfor %}
+  <div class="text-end">
+    <input class="btn btn-primary" type="submit" value="작성">
+  </div>
 </form>
-<a href="{% url 'reviews:index' %}">[back]</a>
 {% endblock content %}

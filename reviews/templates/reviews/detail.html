@@ -5,6 +5,7 @@
 
 <div class="d-flex justify-content-between gap-2 mb-2">
   <a class="btn btn-secondary" href="{% url 'reviews:index' %}">뒤로가기</a>
+  {% if review.user == request.user %}
   <div class="d-flex gap-2">
     <a class="btn btn-secondary" href="{% url 'reviews:update' review.pk %}">수정</a>
     <form action="{% url 'reviews:delete' review.pk %}" method="POST">
@@ -12,6 +13,7 @@
       <input class="btn btn-danger" type="submit" value="삭제">
     </form>
   </div>
+  {% endif %}
 </div>
 
 <div class="border rounded-3 p-3 mb-5">
@@ -27,10 +29,10 @@
     <div class="row g-0">
       <div class="col-md-2 position-relative">
         {% if review.image %}
-          <div class="rating position-absolute top-0 end-0 bg-warning fs-3 p-2 rounded-2 text-white fw-boldtext-center" style="width: 30%;">{{ review.rating }}</div>
+          <div id="rating" class="rating position-absolute top-0 end-0 fs-3 p-2 rounded-2 text-white fw-bold text-center text-nowrap" style="width: 30%;">{{ review.rating }}</div>
           <img src="{{ review.image_thumbnail.url }}" class="img-fluid rounded-start" alt="...">
         {% else %}
-          <div class="rating position-absolute top-0 end-0 bg-warning fs-3 p-2 rounded-2 text-white fw-bold text-center" style="width: 30%;">{{ review.rating }}</div>
+          <div id="rating" class="rating position-absolute top-0 end-0 fs-3 p-2 rounded-2 text-white fw-bold text-center text-nowrap" style="width: 30%;">{{ review.rating }}</div>
           <img src="{% static 'img/film.png' %}" class="img-fluid rounded-start" alt="">
         {% endif %}
       </div>
@@ -46,7 +48,7 @@
   </div>
 </div>
 
-<h3>댓글 목록</h3>
+<h3>댓글 목록 {{ comments|length }}</h3>
 
 {% for comment in  comments%}
   <div class="d-flex align-items-center">
@@ -58,6 +60,10 @@
       </form>
     </div>
   </div>
+{% empty %}
+<div class="fs-1 text-center">
+  <i class="bi bi-chat-dots"></i>
+</div>
 {% endfor %}
 
 <form action=" {% url 'reviews:comment_create' review.pk %} " method="POST">

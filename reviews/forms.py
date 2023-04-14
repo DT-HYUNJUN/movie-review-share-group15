@@ -27,6 +27,7 @@ class ReviewForm(forms.ModelForm):
         ),
     )
     image = forms.ImageField(
+        required=False,
         widget=forms.FileInput(
             attrs={
                 'class': 'form-control',

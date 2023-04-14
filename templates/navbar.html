@@ -6,9 +6,11 @@
       <img class="me-2" id="logo" src="{% static 'img/logo.png' %}" alt="logo">
       Movie Review Share
     </a>
-
-    <div class="d-flex" style="font-family: 'Ubuntu', sans-serif;">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-end">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent" style="font-family: 'Ubuntu', sans-serif;">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="{% url 'reviews:genre' '액션' %}">ACTION</a>
         </li>

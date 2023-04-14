@@ -1,3 +1,12 @@
 #logo {
   height: 4rem
 }
+
+#thumbnail {
+  width: 5rem;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}

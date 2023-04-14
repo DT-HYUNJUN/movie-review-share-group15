@@ -4,13 +4,22 @@
 {{ user }}
 
 <br>
-{% for review in reviews %}
-  <ul>
-    <li>
-      <a href="{% url 'reviews:detail' review.pk %}">{{ review.title }}</a>(작성자: {{ review.user }})
-    </li>
-    <hr>
-  </ul>
-{% endfor %}
+<div class="row row-cols-2 row-cols-md-6 g-4">
+  {% for review in reviews %}
+    <div class="col">
+      <div class="card">
+        <img src="{{ review.image_thumbnail.url }}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title fw-bold"><a href="{% url 'reviews:detail' review.pk %}">{{ review.title }}</a></h5>
+          <p class="card-text"> {{ review.user }}</p>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
 <a class="btn btn-outline-primary" href="{% url 'reviews:create' %}">리뷰작성</a>
 {% endblock content %}
+
+
+
+

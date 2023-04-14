@@ -12,7 +12,7 @@ class Review(models.Model):
     movie = models.CharField(max_length=30)
     image = models.ImageField(blank=True, upload_to='%Y/%m/%d/')
     image_thumbnail = ImageSpecField(source='image',
-        processors=[ResizeToFill(300, 300)],
+        processors=[ResizeToFill(200, 200)],
         format='JPEG',
         options={'quality': 100}
     )

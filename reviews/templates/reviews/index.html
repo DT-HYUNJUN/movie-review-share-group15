@@ -14,14 +14,14 @@
     <div class="col">
       <div class="card position-relative">
         {% if review.image %}
-          <div class="position-absolute top-0 end-0 bg-warning fs-3 p-2 rounded-2 text-white fw-bold text-center" style="width: 35%;">{{ review.rating }}</div>
+          <div id="rating" class="position-absolute top-0 end-0 fs-3 p-2 rounded-2 text-white fw-bold text-center text-nowrap" style="width: 35%;">{{ review.rating }}</div>
           <img src="{{ review.image_thumbnail.url }}" class="card-img-top" alt="...">
         {% else %}
-          <div class="position-absolute top-0 end-0 bg-warning fs-3 p-2 rounded-2 text-white fw-bold text-center" style="width: 35%;">{{ review.rating }}</div>
+          <div id="rating" class="position-absolute top-0 end-0 fs-3 p-2 rounded-2 text-white fw-bold text-center text-nowrap" style="width: 35%;">{{ review.rating }}</div>
           <img src="{% static 'img/film.png' %}" alt="">
         {% endif %}
         <div class="card-body">
-          <h5 class="card-title fw-bold"><a href="{% url 'reviews:detail' review.pk %}">{{ review.title }}</a></h5>
+          <h5 class="card-title fw-bold text-truncate"><a href="{% url 'reviews:detail' review.pk %}">{{ review.title }}</a></h5>
           <p class="card-text"> {{ review.user }}</p>
         </div>
       </div>

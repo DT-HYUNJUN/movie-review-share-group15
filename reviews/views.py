@@ -91,3 +91,11 @@ def comment_delete(request, review_pk, comment_pk):
     if comment.user == request.user:
         comment.delete()
     return redirect('reviews:detail', review_pk)
+
+
+def genre(request, review_genre):
+    reviews = Review.objects.filter(genre=review_genre)
+    context = {
+        'reviews': reviews,
+    }
+    return render(request, 'reviews/index.html', context)
